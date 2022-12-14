@@ -3,6 +3,7 @@ package com.marketboro.point.controller;
 import com.marketboro.point.dto.enums.ErrorAction;
 import com.marketboro.point.dto.enums.ErrorCode;
 import com.marketboro.point.dto.request.SaveReservesReq;
+import com.marketboro.point.dto.request.UseReservesReq;
 import com.marketboro.point.dto.response.ApiResponse;
 import com.marketboro.point.exception.InvalidException;
 import com.marketboro.point.service.ReservesService;
@@ -35,8 +36,14 @@ public class ReservesController {
         return ApiResponse.success(reservesService.getReservesTotal(memberId));
     }
 
-    // 3. 적립/사용 내역 조회
+    // 3. 적릭금 사용
+    @PutMapping("/reserves")
+    public ApiResponse useReserves(@RequestBody @Valid UseReservesReq useReservesReq) {
+            reservesService.useReserves(useReservesReq);
 
-    // 4. 적릭금 사용
+        return ApiResponse.SUCCESS;
+    }
+
+    // 4. 적립/사용 내역 조회
 
 }

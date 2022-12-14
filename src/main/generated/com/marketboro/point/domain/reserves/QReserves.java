@@ -22,9 +22,9 @@ public class QReserves extends EntityPathBase<Reserves> {
 
     public final com.marketboro.point.domain.QBaseTimeEntity _super = new com.marketboro.point.domain.QBaseTimeEntity(this);
 
-    public final NumberPath<java.math.BigDecimal> amount = createNumber("amount", java.math.BigDecimal.class);
+    public final NumberPath<Long> amount = createNumber("amount", Long.class);
 
-    public final NumberPath<java.math.BigDecimal> balance = createNumber("balance", java.math.BigDecimal.class);
+    public final NumberPath<Long> balance = createNumber("balance", Long.class);
 
     //inherited
     public final DateTimePath<java.time.LocalDateTime> createAt = _super.createAt;

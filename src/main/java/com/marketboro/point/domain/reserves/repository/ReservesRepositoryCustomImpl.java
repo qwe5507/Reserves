@@ -26,7 +26,8 @@ public class ReservesRepositoryCustomImpl implements ReservesRepositoryCustom {
                     reserves.memberId.eq(memberId),
                     reserves.status.eq(reservesStatus),
                     reserves.expiredAt.gt(nowTime)
-            ).fetch();
+            ).orderBy(reserves.expiredAt.asc())
+            .fetch();
     }
 
 }

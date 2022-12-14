@@ -33,10 +33,10 @@ public class Reserves extends BaseTimeEntity {
     private String memberId;
 
     @Column(nullable = false)
-    private BigDecimal amount;
+    private Long amount;
 
     @Column(nullable = false)
-    private BigDecimal balance;
+    private Long balance;
 
     @Column(nullable = false, length = 6)
     @Enumerated(EnumType.STRING)
@@ -56,6 +56,15 @@ public class Reserves extends BaseTimeEntity {
                 .expiredAt(LocalDateTime.now().plusYears(1).atZone(ZoneId.systemDefault()).toInstant().toEpochMilli())
                 .status(ReservesStatus.UNUSED)
                 .build();
+    }
+
+    public void updateBalance(Long balance) {
+        this.balance = balance;
+    }
+
+    public void useReserves() {
+        this.balance = 0L;
+        this.status = ReservesStatus.USED;
     }
 
 }

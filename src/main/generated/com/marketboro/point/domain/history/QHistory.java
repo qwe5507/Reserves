@@ -22,7 +22,7 @@ public class QHistory extends EntityPathBase<History> {
 
     public final com.marketboro.point.domain.QBaseTimeEntity _super = new com.marketboro.point.domain.QBaseTimeEntity(this);
 
-    public final NumberPath<java.math.BigDecimal> amount = createNumber("amount", java.math.BigDecimal.class);
+    public final NumberPath<Long> amount = createNumber("amount", Long.class);
 
     //inherited
     public final DateTimePath<java.time.LocalDateTime> createAt = _super.createAt;
@@ -31,6 +31,8 @@ public class QHistory extends EntityPathBase<History> {
     public final NumberPath<Long> id = _super.id;
 
     public final BooleanPath isCanceled = createBoolean("isCanceled");
+
+    public final StringPath memberId = createString("memberId");
 
     public final ListPath<com.marketboro.point.domain.reserves_history.ReservesHistory, com.marketboro.point.domain.reserves_history.QReservesHistory> reservesHistoryList = this.<com.marketboro.point.domain.reserves_history.ReservesHistory, com.marketboro.point.domain.reserves_history.QReservesHistory>createList("reservesHistoryList", com.marketboro.point.domain.reserves_history.ReservesHistory.class, com.marketboro.point.domain.reserves_history.QReservesHistory.class, PathInits.DIRECT2);
 
