@@ -1,15 +1,16 @@
 package com.marketboro.point.controller;
 
-import com.marketboro.point.dto.enums.ErrorAction;
-import com.marketboro.point.dto.enums.ErrorCode;
+import com.marketboro.point.domain.history.projection.HistoryProjection;
 import com.marketboro.point.dto.request.SaveReservesReq;
 import com.marketboro.point.dto.request.UseReservesReq;
 import com.marketboro.point.dto.response.ApiResponse;
-import com.marketboro.point.exception.InvalidException;
 import com.marketboro.point.service.ReservesService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.validation.BindingResult;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -45,5 +46,9 @@ public class ReservesController {
     }
 
     // 4. 적립/사용 내역 조회
-
+    @GetMapping("/history")
+    public ApiResponse<Page<HistoryProjection>> getReservesList(String memberId,
+                                                                @PageableDefault(direction = Sort.Direction.DESC) Pageable pageable) {
+        return ApiResponse.success(reservesService.getReservesList(memberId, pageable));
+    }
 }

@@ -3,12 +3,9 @@ package com.marketboro.point.domain.history;
 import com.marketboro.point.domain.BaseTimeEntity;
 import com.marketboro.point.domain.reserves_history.ReservesHistory;
 import com.marketboro.point.dto.enums.HistoryType;
-import com.marketboro.point.dto.request.SaveReservesReq;
-import com.marketboro.point.dto.request.UseReservesReq;
 import lombok.*;
 
 import javax.persistence.*;
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 

@@ -2,6 +2,7 @@ package com.marketboro.point.service;
 
 import com.marketboro.point.domain.history.History;
 import com.marketboro.point.domain.history.HistoryRepository;
+import com.marketboro.point.domain.history.projection.HistoryProjection;
 import com.marketboro.point.domain.reserves.Reserves;
 import com.marketboro.point.domain.reserves.repository.ReservesRepository;
 import com.marketboro.point.domain.reserves_history.ReservesHistory;
@@ -13,13 +14,13 @@ import com.marketboro.point.dto.enums.ReservesStatus;
 import com.marketboro.point.dto.request.SaveReservesReq;
 import com.marketboro.point.dto.request.UseReservesReq;
 import com.marketboro.point.exception.InvalidException;
-import com.marketboro.point.exception.NotFoundException;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.ArrayList;
@@ -91,5 +92,9 @@ public class ReservesService {
         for (Reserves reserves : usedReservesList) {
             reservesHistoryRepository.save(ReservesHistory.of(reserves, savedHistory));
         }
+    }
+
+    public Page<HistoryProjection> getReservesList(String memberId, Pageable pageable){
+        return historyRepository.findAllByMemberId(memberId, pageable);
     }
 }
