@@ -6,18 +6,21 @@ import com.marketboro.point.domain.member.Email;
 import com.marketboro.point.domain.member.MemberProvider;
 import com.marketboro.point.domain.reserves_history.ReservesHistory;
 import com.marketboro.point.dto.enums.ReservesStatus;
-import lombok.AccessLevel;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import com.marketboro.point.dto.request.SaveReservesReq;
+import lombok.*;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.List;
 
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+@AllArgsConstructor
 @Entity
+@Builder
 @Table(
 //    uniqueConstraints = {
 //        @UniqueConstraint(name = "uni_member_1", columnNames = {"uid", "provider"}),
@@ -35,7 +38,7 @@ public class Reserves extends BaseTimeEntity {
     @Column(nullable = false)
     private BigDecimal balance;
 
-    @Column(nullable = false, length = 5)
+    @Column(nullable = false, length = 6)
     @Enumerated(EnumType.STRING)
     private ReservesStatus status;
 
@@ -44,4 +47,15 @@ public class Reserves extends BaseTimeEntity {
 
     @OneToMany(mappedBy = "reserves")
     private List<ReservesHistory> reservesHistoryList = new ArrayList<>();
+
+    public static Reserves of(SaveReservesReq saveReservesReq) {
+        return Reserves.builder()
+                .memberId(saveReservesReq.getMemberId())
+                .amount(saveReservesReq.getAmount())
+                .balance(saveReservesReq.getAmount())
+                .expiredAt(LocalDateTime.now().plusYears(1).atZone(ZoneId.systemDefault()).toInstant().toEpochMilli())
+                .status(ReservesStatus.UNUSED)
+                .build();
+    }
+
 }

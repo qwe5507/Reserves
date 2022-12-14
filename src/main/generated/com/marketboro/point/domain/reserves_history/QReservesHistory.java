@@ -22,6 +22,8 @@ public class QReservesHistory extends EntityPathBase<ReservesHistory> {
 
     public static final QReservesHistory reservesHistory = new QReservesHistory("reservesHistory");
 
+    public final DateTimePath<java.time.LocalDateTime> createAt = createDateTime("createAt", java.time.LocalDateTime.class);
+
     public final com.marketboro.point.domain.history.QHistory history;
 
     public final NumberPath<Long> id = createNumber("id", Long.class);
