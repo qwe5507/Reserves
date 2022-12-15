@@ -14,3 +14,8 @@
 2. 적립금 합계 조회
 3. 적릭금 사용
 4. 적립/사용 내역 조회
+
+### 실행방법 (IntelliJ IDEA)
+1. git clone
+2. Q파일 생성 (gradle - other - complieQueryDsl)
+3. application 구동
