@@ -18,3 +18,12 @@
 1. git clone
 2. Q파일 생성 (gradle - other - complieQueryDsl)
 3. application 구동
+
+### 환경 
+- Spring Boot 2.7.6
+- QuertDsl
+- Spring Data Jpa
+- H2 Database
+- Quartz
+
+> Expired_At으로만 유효기간을 추정 할 수 있겠지만, 처음 설계시 만료 상태가 필요하여 보였고 쿼츠 적용 연습 겸 `Expired_at 초과 시 status를 변경 스케쥴링 적용`
