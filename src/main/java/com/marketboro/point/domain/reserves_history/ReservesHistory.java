@@ -15,6 +15,7 @@ import java.time.LocalDateTime;
 @Builder
 @Entity
 @EntityListeners(AuditingEntityListener.class)
+@Table(indexes = @Index(name = "idx_history_id", columnList = "history_id", unique = false))
 public class ReservesHistory {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
