@@ -118,7 +118,6 @@ public class ReservesService {
         }
 
         List<ReservesHistory> reserveHistoryList = reservesHistoryRepository.findAllByHistoryId(history.getId());
-        log.info("reserveHistoryList : {}", reserveHistoryList);
 
         List<Long> reserveIdList = reserveHistoryList.stream().map(ReservesHistory -> ReservesHistory.getReserves().getId()).collect(Collectors.toList());
 

@@ -63,8 +63,8 @@ public class Reserves extends BaseTimeEntity {
         this.status = ReservesStatus.USED;
     }
 
-    public void updateStatus(ReservesStatus stauts) {
-        this.status = stauts;
+    public void updateStatus(ReservesStatus status) {
+        this.status = status;
     }
 
     public void unused() {

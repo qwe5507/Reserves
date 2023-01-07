@@ -56,7 +56,6 @@ public class ReservesController {
     // 5. 사용 취소
     @PostMapping("/cancel-reserves")
     public ApiResponse cancelReserves(@RequestBody @Valid CancelReq cancelReq) {
-        log.info("history id : {}", cancelReq.getHistoryId());
         reservesService.cancel(cancelReq);
         return ApiResponse.SUCCESS;
     }
