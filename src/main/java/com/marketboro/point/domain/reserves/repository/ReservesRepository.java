@@ -1,6 +1,5 @@
 package com.marketboro.point.domain.reserves.repository;
 
-import com.marketboro.point.domain.member.Member;
 import com.marketboro.point.domain.reserves.Reserves;
 import org.springframework.data.jpa.repository.JpaRepository;
 

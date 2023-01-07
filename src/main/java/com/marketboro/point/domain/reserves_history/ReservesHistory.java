@@ -1,10 +1,7 @@
 package com.marketboro.point.domain.reserves_history;
 
-import com.marketboro.point.domain.BaseTimeEntity;
 import com.marketboro.point.domain.history.History;
 import com.marketboro.point.domain.reserves.Reserves;
-import com.marketboro.point.dto.enums.HistoryType;
-import com.marketboro.point.dto.request.SaveReservesReq;
 import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
