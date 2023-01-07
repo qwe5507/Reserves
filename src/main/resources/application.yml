@@ -3,6 +3,8 @@ server:
   name: point-api
 
 spring:
+  profiles:
+    active: local
   datasource:
     url: jdbc:h2:tcp://localhost/~/test;
     username: sa
