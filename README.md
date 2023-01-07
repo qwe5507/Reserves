@@ -1,3 +1,5 @@
+## 적립금 API 구현 
+> 일정 상 진행 하지 못했던 과제, 현업에서 사용하지 못해보았던 기술을 조금이지만 사용해 볼 수 있어 재밌었다.
 
 ### erd
 ![erd.PNG](src/main/resources/erd.PNG)
@@ -16,3 +18,14 @@
 1. git clone
 2. Q파일 생성 (gradle - other - complieQueryDsl)
 3. application 구동
+
+### 환경 
+- Spring Boot 2.7.6
+- QuertDsl
+- Spring Data Jpa
+- H2 Database
+- Quartz
+
+> Expired_At으로만 유효기간을 추정 할 수 있겠지만, 처음 설계시 만료 상태가 필요하여 보였고 쿼츠 적용 연습 겸 `Expired_at 초과 시 status를 변경 스케쥴링 적용`
+
+- 테스트 코드 작성 ~ING
