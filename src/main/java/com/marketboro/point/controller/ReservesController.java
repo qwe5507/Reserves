@@ -1,6 +1,7 @@
 package com.marketboro.point.controller;
 
 import com.marketboro.point.domain.history.projection.HistoryProjection;
+import com.marketboro.point.dto.request.CancelReq;
 import com.marketboro.point.dto.request.SaveReservesReq;
 import com.marketboro.point.dto.request.UseReservesReq;
 import com.marketboro.point.dto.response.ApiResponse;
@@ -50,5 +51,13 @@ public class ReservesController {
     public ApiResponse<Page<HistoryProjection>> getReservesList(String memberId,
                                                                 @PageableDefault(direction = Sort.Direction.DESC) Pageable pageable) {
         return ApiResponse.success(reservesService.getReservesList(memberId, pageable));
+    }
+
+    // 5. 사용 취소
+    @PostMapping("/cancel-reserves")
+    public ApiResponse cancelReserves(@RequestBody @Valid CancelReq cancelReq) {
+        log.info("history id : {}", cancelReq.getHistoryId());
+        reservesService.cancel(cancelReq);
+        return ApiResponse.SUCCESS;
     }
 }

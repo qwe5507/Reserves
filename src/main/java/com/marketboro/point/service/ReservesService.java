@@ -11,10 +11,14 @@ import com.marketboro.point.dto.enums.ErrorAction;
 import com.marketboro.point.dto.enums.ErrorCode;
 import com.marketboro.point.dto.enums.HistoryType;
 import com.marketboro.point.dto.enums.ReservesStatus;
+import com.marketboro.point.dto.request.CancelReq;
 import com.marketboro.point.dto.request.SaveReservesReq;
 import com.marketboro.point.dto.request.UseReservesReq;
+import com.marketboro.point.exception.ConflictException;
 import com.marketboro.point.exception.InvalidException;
+import com.marketboro.point.exception.NotFoundException;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -25,7 +29,10 @@ import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 @Transactional
@@ -96,5 +103,45 @@ public class ReservesService {
 
     public Page<HistoryProjection> getReservesList(String memberId, Pageable pageable){
         return historyRepository.findAllByMemberId(memberId, pageable);
+    }
+
+    public void cancel(CancelReq cancelReq) {
+        History history = historyRepository.findById(cancelReq.getHistoryId())
+                .orElseThrow(() -> new NotFoundException("History 없음"));
+
+        if (history.isCanceled()) {
+            throw new ConflictException("이미 취소된 History 입니다");
+        }
+
+        if (HistoryType.USE != history.getType()) {
+            throw new InvalidException("취소 할수 없는 Type History 입니다.");
+        }
+
+        List<ReservesHistory> reserveHistoryList = reservesHistoryRepository.findAllByHistoryId(history.getId());
+        log.info("reserveHistoryList : {}", reserveHistoryList);
+
+        List<Long> reserveIdList = reserveHistoryList.stream().map(ReservesHistory -> ReservesHistory.getReserves().getId()).collect(Collectors.toList());
+
+        List<Reserves> cancelReservesList = reservesRepository.findAllByInIdAndNotExpired(reserveIdList);
+
+        Long remainCancelAmount = history.getAmount();
+        for (Reserves reserves : cancelReservesList) {
+            if (ReservesStatus.EXPIRE == reserves.getStatus()) {
+                throw new InvalidException("취소 기한이 지났습니다.");
+            }
+            Long tempAmount = reserves.getBalance() + remainCancelAmount;
+
+            if (tempAmount < reserves.getAmount()) {
+                reserves.updateBalance(remainCancelAmount + reserves.getBalance());
+            } else {
+                reserves.unused();
+                remainCancelAmount = tempAmount - reserves.getAmount();
+            }
+
+            if (reserves.getAmount() == reserves.getBalance()) {
+                reserves.updateStatus(ReservesStatus.UNUSED);
+            }
+        }
+        history.isCancle();
     }
 }

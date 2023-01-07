@@ -28,7 +28,7 @@ public class History extends BaseTimeEntity {
     private Long amount;
 
     @Column(nullable = false)
-    private Boolean isCanceled;
+    private boolean isCanceled;
 
     @OneToMany(mappedBy = "history")
     private List<ReservesHistory> reservesHistoryList = new ArrayList<>();
@@ -40,6 +40,10 @@ public class History extends BaseTimeEntity {
                 .isCanceled(isCanceled)
                 .memberId(memberId)
                 .build();
+    }
+    public void isCancle() {
+        this.isCanceled = true;
+        this.type = HistoryType.CANCEL;
     }
 
 }

@@ -26,4 +26,14 @@ public class ReservesRepositoryCustomImpl implements ReservesRepositoryCustom {
             .fetch();
     }
 
+    @Override
+    public List<Reserves> findAllByInIdAndNotExpired(List<Long> reserveIdList) {
+
+        return queryFactory.selectFrom(reserves)
+                .where(
+                        reserves.id.in(reserveIdList)
+                ).orderBy(reserves.expiredAt.asc())
+                .fetch();
+    }
+
 }
