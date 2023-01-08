@@ -17,12 +17,13 @@ import java.util.List;
 @AllArgsConstructor
 @Entity
 @Builder
-@Table(
+//@Table(
 //    uniqueConstraints = {
 //        @UniqueConstraint(name = "uni_member_1", columnNames = {"uid", "provider"}),
 //        @UniqueConstraint(name = "uni_member_2", columnNames = {"name"})
 //    }
-)
+//)
+@Table(indexes = @Index(name = "idx_expired_at", columnList = "expired_at", unique = false))
 public class Reserves extends BaseTimeEntity {
 
     @Column(nullable = false, length = 32)
