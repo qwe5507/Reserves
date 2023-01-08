@@ -53,7 +53,7 @@ public class SchedulerInit {
                 JobBuilder.newJob(ReservesExpiredUpdateJob.class).withIdentity(ReservesExpiredUpdateJob.class.getSimpleName()).build(),
                 TriggerBuilder.newTrigger().withIdentity("reservesExpiredUpdateTrigger").withSchedule(
                         CronScheduleBuilder
-                                .cronSchedule("0 0/1 * 1/1 * ? *")                     /* 1분 마다 */
+                                .cronSchedule("0 0/10 * 1/1 * ? *")                     /* 10분 마다 */
                                 .inTimeZone(TIMEZONE_KST)
                 ).build());
     }
