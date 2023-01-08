@@ -10,4 +10,6 @@ public interface ReservesRepositoryCustom {
     List<Reserves> findAllByMemberIdAndStatusAndNotExpired(String memberId, ReservesStatus reservesStatus, Long nowTime);
 
     List<Reserves> findAllByInIdAndNotExpired(List<Long> reserveIdList);
+
+    public long updateExpiredReservesByExpiredAt(Long expiredAt);
 }

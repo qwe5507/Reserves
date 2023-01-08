@@ -145,6 +145,8 @@ public class ReservesService {
     }
 
     public void reservesExpiredUpdate() {
+        long timestamp = LocalDateTime.now().atZone(ZoneId.systemDefault()).toInstant().toEpochMilli();
 
+        long result = reservesRepository.updateExpiredReservesByExpiredAt(timestamp);
     }
 }

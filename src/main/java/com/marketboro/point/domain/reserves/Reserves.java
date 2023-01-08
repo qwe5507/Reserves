@@ -23,7 +23,7 @@ import java.util.List;
 //        @UniqueConstraint(name = "uni_member_2", columnNames = {"name"})
 //    }
 //)
-@Table(indexes = @Index(name = "idx_expired_at", columnList = "expired_at", unique = false))
+@Table(indexes = @Index(name = "idx_expired_at", columnList = "expired_at  ", unique = false))
 public class Reserves extends BaseTimeEntity {
 
     @Column(nullable = false, length = 32)
@@ -39,7 +39,7 @@ public class Reserves extends BaseTimeEntity {
     @Enumerated(EnumType.STRING)
     private ReservesStatus status;
 
-    @Column(nullable = false)
+    @Column(nullable = false, name = "expired_at")
     private Long expiredAt;
 
     @OneToMany(mappedBy = "reserves")
