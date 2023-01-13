@@ -72,7 +72,7 @@ class ReservesServiceTest {
 
     @Test
     @DisplayName("적립금 합계 조회 시, 적립 내역이 없을 떄")
-    public void getReservesTotal() {
+    public void 적립금_합계_조회_시_적립내역이_없을때() {
         Long nowTime = LocalDateTime.now().atZone(ZoneId.systemDefault()).toInstant().toEpochMilli();
         String memberId = "1";
 
@@ -80,5 +80,27 @@ class ReservesServiceTest {
                 .thenReturn(new ArrayList<Reserves>());
 
         assertThat(reservesService.getReservesTotal("1")).isEqualTo(0L);
+    }
+
+    @Test
+    @DisplayName("적립금 합계 조회 시, 적립 내역이 있을 때")
+    public void 적립금_합계_조회_시_적립내역이_있을때() {
+        Long nowTime = LocalDateTime.now().atZone(ZoneId.systemDefault()).toInstant().toEpochMilli();
+        String memberId = "1";
+
+        Reserves reserves1 = Reserves.builder()
+                .memberId("1")
+                .amount(1L)
+                .build();
+
+        Reserves reserves2 = Reserves.builder()
+                .memberId("1")
+                .amount(2L)
+                .build();
+
+        when(reservesRepository.findAllByMemberIdAndStatusAndNotExpired("1", ReservesStatus.UNUSED, nowTime))
+                .thenReturn(Arrays.asList(reserves1, reserves2));
+
+        assertThat(reservesService.getReservesTotal("1")).isEqualTo(3L);
     }
 }
