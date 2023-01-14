@@ -51,8 +51,8 @@ public class ReservesService {
     }
 
     @Transactional(readOnly = true, propagation = Propagation.REQUIRED)
-    public Long getReservesTotal(String memberId) {
-        Long nowTime = LocalDateTime.now().atZone(ZoneId.systemDefault()).toInstant().toEpochMilli();
+    public Long getReservesTotal(String memberId,Long nowTime) {
+
         List<Reserves> reservesList = reservesRepository.findAllByMemberIdAndStatusAndNotExpired(memberId, ReservesStatus.UNUSED, nowTime);
 
         if (reservesList.isEmpty()) {

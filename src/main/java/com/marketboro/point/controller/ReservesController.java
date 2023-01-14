@@ -15,6 +15,8 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 
 @Slf4j
 @RestController
@@ -35,7 +37,9 @@ public class ReservesController {
     // 2. 적립금 합계 조회
     @GetMapping("/reserves-total")
     public ApiResponse<Long> getReservesTotal(String memberId) {
-        return ApiResponse.success(reservesService.getReservesTotal(memberId));
+        Long nowTime = LocalDateTime.now().atZone(ZoneId.systemDefault()).toInstant().toEpochMilli();
+
+        return ApiResponse.success(reservesService.getReservesTotal(memberId, nowTime));
     }
 
     // 3. 적릭금 사용
