@@ -62,9 +62,8 @@ public class ReservesService {
         return reservesList.stream().mapToLong(i -> i.getBalance()).sum();
     }
 
-    public void useReserves(UseReservesReq useReservesReq) {
+    public void useReserves(UseReservesReq useReservesReq, Long nowTime) {
 
-        Long nowTime = LocalDateTime.now().atZone(ZoneId.systemDefault()).toInstant().toEpochMilli();
         List<Reserves> reservesList = reservesRepository.findAllByMemberIdAndStatusAndNotExpired(useReservesReq.getMemberId(), ReservesStatus.UNUSED, nowTime);
 
         Long totalReserves = reservesList.stream().mapToLong(i -> i.getBalance()).sum();

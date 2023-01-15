@@ -45,7 +45,9 @@ public class ReservesController {
     // 3. 적릭금 사용
     @PutMapping("/reserves")
     public ApiResponse useReserves(@RequestBody @Valid UseReservesReq useReservesReq) {
-            reservesService.useReserves(useReservesReq);
+        Long nowTime = LocalDateTime.now().atZone(ZoneId.systemDefault()).toInstant().toEpochMilli();
+
+        reservesService.useReserves(useReservesReq, nowTime);
 
         return ApiResponse.SUCCESS;
     }
