@@ -4,6 +4,7 @@ import com.p6spy.engine.common.ConnectionInformation;
 import com.p6spy.engine.event.JdbcEventListener;
 import com.p6spy.engine.spy.P6SpyOptions;
 import com.p6spy.engine.spy.appender.MessageFormattingStrategy;
+import lombok.extern.slf4j.Slf4j;
 import org.hibernate.engine.jdbc.internal.FormatStyle;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
@@ -11,6 +12,7 @@ import org.springframework.util.StringUtils;
 import java.sql.SQLException;
 
 @Component  // 1
+@Slf4j
 public class P6SpyFormatter extends JdbcEventListener implements MessageFormattingStrategy {
 
     @Override // 2
@@ -21,6 +23,7 @@ public class P6SpyFormatter extends JdbcEventListener implements MessageFormatti
     @Override // 3
     public String formatMessage(int connectionId, String now, long elapsed, String category, String prepared, String sql, String url) {
         StringBuilder sb = new StringBuilder();
+
         sb.append(category).append(" ").append(elapsed).append("ms");
         if (StringUtils.hasText(sql)) {
             sb.append(highlight(format(sql)));
