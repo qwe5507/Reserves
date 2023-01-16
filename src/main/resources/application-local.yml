@@ -1,16 +1,29 @@
 logging:
+  file:
+    path: C:\log
+    name: ${logging.file.path}/reserves.log
   level:
     root: INFO
+#    org:
+#      springframework:
+#        jdbc:
+#          core:
+#            JdbcTemplate: ERROR
+#            StatementCreatorUtils: ERROR
+#      hibernate:
+#        dialect:
+#          H2Dialect: ERROR
+#      hibernate:
+#        SQL: INFO
+#        type:
+#          descriptor:
+#            sql: INFO
 #    org:
 #      springframework: ERROR
 #        web: INFO
 #          filter: DEBUG
 #        boot:
 #          autoconfigure: INFO
-  file:
-    path: C:\log
-    name: ${logging.file.path}/reserves.log
-
   logback:
     rollingpolicy:
       clean-history-on-start: false
