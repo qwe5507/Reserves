@@ -26,11 +26,14 @@ public class P6SpyFormatter extends JdbcEventListener implements MessageFormatti
 
         sb.append(category).append(" ").append(elapsed).append("ms");
         if (StringUtils.hasText(sql)) {
-            sb.append(highlight(format(sql)));
+            // 하이라이트가 로그 저장시에 이상한 숫자로 표시됨
+//            sb.append(highlight(format(sql)));
+            sb.append(format(sql));
         }
         return sb.toString();
+//        return "#" + now + " | took " + elapsed + "ms | " + category + " | connection " + connectionId + "| url " + url + "\n" + prepared + "\n" + sql +";";
     }
-
+    // 위의 주석 친 포매터가 이상한 데이터가 포함되서
     private String format(String sql) {
         if (isDDL(sql)) {
             return FormatStyle.DDL.getFormatter().format(sql);
