@@ -56,7 +56,8 @@ dependencies {
 	annotationProcessor "jakarta.annotation:jakarta.annotation-api"
 
 //	implementation 'com.github.gavlyukovskiy:p6spy-spring-boot-starter:1.8.1'
-
+//	implementation 'org.springframework.cloud:spring-cloud-gcp-starter-storage'
+	implementation group: 'org.springframework.cloud', name: 'spring-cloud-gcp-starter-storage', version: '1.2.8.RELEASE'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
 
