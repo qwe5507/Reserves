@@ -1,5 +1,4 @@
-## 적립금 API 구현 
-> 일정 상 진행 하지 못했던 과제
+## 적립금 API 구현
 
 ### erd
 ![erd.PNG](src/main/resources/erd.PNG)
