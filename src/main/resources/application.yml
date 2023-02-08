@@ -35,9 +35,9 @@ spring:
         default-page-size: 20
         one-indexed-parameters: true
 
-  cloud:
-    gcp:
-      credentials:
-        location: classpath:paygate-303505-e3b82659e330.json
+#  cloud:
+#    gcp:
+#      credentials:
+#        location: classpath:paygate-303505-e3b82659e330.json
 # 프로젝트 내 경로
 #  spring.cloud.gcp.credentials.location=classpath:libs/keys/[파일명].json
