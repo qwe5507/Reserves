@@ -11,5 +11,5 @@ public interface ReservesRepositoryCustom {
 
     List<Reserves> findAllByInIdAndNotExpired(List<Long> reserveIdList);
 
-    public long updateExpiredReservesByExpiredAt(Long expiredAt);
+    long updateExpiredReservesByExpiredAt(Long expiredAt);
 }

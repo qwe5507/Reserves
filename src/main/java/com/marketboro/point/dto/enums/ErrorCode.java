@@ -15,7 +15,7 @@ public enum ErrorCode {
     /**
      * 401 UnAuthorized (토큰 만료)
      */
-    E401_UNAUTHORIZED("U4100", 401 , "UnAuthorized"),
+    E401_UNAUTHORIZED("U4100", 401, "UnAuthorized"),
 
 
     /**
@@ -62,20 +62,20 @@ public enum ErrorCode {
     /**
      * 500 Internal Server Exception (서버 내부 에러)
      */
-    E500_INTERNAL_SERVER("Z5000",  500, "예상치 못한 에러가 발생하였습니다. 잠시 후 다시 시도해주세요!"),
-    E500_INTERNAL_CONVERT_ENUM_CODE("Z5004",  500, "컨버트 오류"),
+    E500_INTERNAL_SERVER("Z5000", 500, "예상치 못한 에러가 발생하였습니다. 잠시 후 다시 시도해주세요!"),
+    E500_INTERNAL_CONVERT_ENUM_CODE("Z5004", 500, "컨버트 오류"),
 
 
     /**
      * 502 Bad Gateway
      */
-    E502_BAD_GATEWAY("B5200",  502, "일시적인 오류가 발생했습니다. 잠시 후 다시 시도해주세요!"),
+    E502_BAD_GATEWAY("B5200", 502, "일시적인 오류가 발생했습니다. 잠시 후 다시 시도해주세요!"),
 
 
     /**
      * 503 Service UnAvailable
      */
-    E503_SERVICE_UNAVAILABLE("B5300", 503,  "사용할 수 없는 기능입니다");
+    E503_SERVICE_UNAVAILABLE("B5300", 503, "사용할 수 없는 기능입니다");
 
 
     private final String code;
@@ -85,7 +85,13 @@ public enum ErrorCode {
     public int getStatusCode() {
         return this.statusCode;
     }
-    public String getCode() { return this.code; }
-    public String getMessage() { return this.message; }
+
+    public String getCode() {
+        return this.code;
+    }
+
+    public String getMessage() {
+        return this.message;
+    }
 
 }

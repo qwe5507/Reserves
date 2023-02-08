@@ -21,7 +21,7 @@ public class ReservesExpiredUpdateJob extends QuartzJobBean {
             log.info("[ReservesExpiredUpdateJob] start");
             reservesService.reservesExpiredUpdate();
 
-        } catch(Exception e) {
+        } catch (Exception e) {
             log.error("[ReservesExpiredUpdateJob]", e);
             throw new JobExecutionException(e);
         } finally {

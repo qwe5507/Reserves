@@ -29,7 +29,6 @@ import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Slf4j
@@ -51,7 +50,7 @@ public class ReservesService {
     }
 
     @Transactional(readOnly = true, propagation = Propagation.REQUIRED)
-    public Long getReservesTotal(String memberId,Long nowTime) {
+    public Long getReservesTotal(String memberId, Long nowTime) {
 
         List<Reserves> reservesList = reservesRepository.findAllByMemberIdAndStatusAndNotExpired(memberId, ReservesStatus.UNUSED, nowTime);
 
@@ -100,7 +99,7 @@ public class ReservesService {
         }
     }
 
-    public Page<HistoryProjection> getReservesList(String memberId, Pageable pageable){
+    public Page<HistoryProjection> getReservesList(String memberId, Pageable pageable) {
         return historyRepository.findAllByMemberId(memberId, pageable);
     }
 

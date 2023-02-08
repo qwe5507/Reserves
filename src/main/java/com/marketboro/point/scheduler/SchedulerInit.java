@@ -4,7 +4,6 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.quartz.*;
 import org.quartz.impl.matchers.GroupMatcher;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
@@ -14,6 +13,7 @@ import java.util.TimeZone;
 @Component
 @RequiredArgsConstructor
 public class SchedulerInit {
+    private static final TimeZone TIMEZONE_KST = TimeZone.getTimeZone("GMT+9");
     private final Scheduler scheduler;
 
     @PostConstruct
@@ -44,8 +44,6 @@ public class SchedulerInit {
             }
         }
     }
-
-    private static final TimeZone TIMEZONE_KST = TimeZone.getTimeZone("GMT+9");
 
     private void registerTriggers() throws SchedulerException {
         // transact token 삭제

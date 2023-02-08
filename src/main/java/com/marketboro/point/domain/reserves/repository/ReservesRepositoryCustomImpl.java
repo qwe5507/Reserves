@@ -23,12 +23,12 @@ public class ReservesRepositoryCustomImpl implements ReservesRepositoryCustom {
     public List<Reserves> findAllByMemberIdAndStatusAndNotExpired(String memberId, ReservesStatus reservesStatus, Long nowTime) {
 
         return queryFactory.selectFrom(reserves)
-            .where(
-                    reserves.memberId.eq(memberId),
-                    reserves.status.eq(reservesStatus),
-                    reserves.expiredAt.gt(nowTime)
-            ).orderBy(reserves.expiredAt.asc())
-            .fetch();
+                .where(
+                        reserves.memberId.eq(memberId),
+                        reserves.status.eq(reservesStatus),
+                        reserves.expiredAt.gt(nowTime)
+                ).orderBy(reserves.expiredAt.asc())
+                .fetch();
     }
 
     @Override
