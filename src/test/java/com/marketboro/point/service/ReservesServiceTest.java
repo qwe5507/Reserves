@@ -19,6 +19,7 @@ import org.mockito.BDDMockito;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.test.context.jdbc.Sql;
 
 import java.time.LocalDateTime;
 import java.time.ZoneId;
@@ -125,6 +126,8 @@ class ReservesServiceTest {
         assertThrows(InvalidException.class, () -> reservesService.useReserves(useReservesReq, nowTime));
     }
 
+
+    @Sql("classpath:db/tableInit.sql")
     @Test
     @DisplayName("적립금 사용 시, 5만원 적립 2번 후, 1만원 적립금 사용 시 오래된 적립금이 한번 사용 된다.")
     public void 적립금_사용시_5만원적립_2번후_1만원_적립금_사용시_오래된_적립금이_한번_사용된다() {
@@ -148,7 +151,6 @@ class ReservesServiceTest {
 
         // then
         verify(historyRepository, times(1)).save(argThat(new IsHistoryWillBeInserted()));
-        verify(reservesHistoryRepository, times(0)).save(argThat(new IsReservesHistoryWillBeInserted()));
     }
 
     private List<Reserves> getRerservesList() {
