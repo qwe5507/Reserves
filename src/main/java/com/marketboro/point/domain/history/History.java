@@ -41,7 +41,7 @@ public class History extends BaseTimeEntity {
                 .memberId(memberId)
                 .build();
     }
-    public void isCancle() {
+    public void cancel() {
         this.isCanceled = true;
         this.type = HistoryType.CANCEL;
     }

@@ -139,7 +139,7 @@ public class ReservesService {
                 reserves.updateStatus(ReservesStatus.UNUSED);
             }
         }
-        history.isCancle();
+        history.cancel();
     }
 
     public void reservesExpiredUpdate() {
